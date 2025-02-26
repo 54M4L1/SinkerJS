@@ -13,17 +13,14 @@ userInput.addEventListener('keypress', function (e) {
     }
 });
 
-// فتح النافذة عند الضغط على الزر
 openModalBtn.addEventListener('click', function () {
     modal.style.display = 'block';
 });
 
-// غلق النافذة عند الضغط على زر الإغلاق
 closeModalBtn.addEventListener('click', function () {
     modal.style.display = 'none';
 });
 
-// غلق النافذة عند الضغط خارجها
 window.addEventListener('click', function (event) {
     if (event.target === modal) {
         modal.style.display = 'none';
@@ -32,7 +29,6 @@ window.addEventListener('click', function (event) {
 
 
 function toggleButton() {
-    // التحقق من محتوى مربع الإدخال وتحديث حالة الأزرار
     if (userInput.value.trim() === '') {
         sendBtn.style.display = 'none';
         openModalBtn.style.display = 'inline-block';
@@ -42,20 +38,16 @@ function toggleButton() {
     }
 }
 
-// التحقق بشكل دوري كل ثانية (1000 ميلي ثانية)
 setInterval(toggleButton, 1);
 
-// Initialize the button state on page load
 toggleButton();
 
 
 
 
 function setModel(modelType) {
-    // إغلاق النافذة بعد اختيار الموديل
     modal.style.display = 'none';
 
-    // إرسال رسالة تعبر عن اختيار الموديل
     let modelMessage = '';
 
     switch (modelType) {
@@ -83,10 +75,8 @@ function setModel(modelType) {
 
 
 
-    // إضافة الرسالة إلى سجل المحادثة
     conversationHistory.push({ sender: 'system', message: modelMessage });
 
-    // يمكنك هنا أيضًا إرسال الرسالة إلى الـ API إذا أردت تحديث النموذج بناءً على الاختيار
     console.log(`Model selected: ${modelType}`);
 }
 
@@ -127,7 +117,7 @@ async function sendMessage() {
     appendMessage('user-message', message);
     userInput.value = '';
     sendBtn.disabled = true;
-    loading.classList.add('show'); // إظهار التحميل دون تغيير التخطيط
+    loading.classList.add('show');
 
     try {
         const response = await puter.ai.chat(conversationHistory.map(item => item.message).join("\n"));
@@ -182,6 +172,6 @@ function showError(message) {
 
         setTimeout(() => {
             erBox.style.display = 'none';
-        }, 5000);  // Timeout of 5 seconds for hiding the error message
+        }, 5000); 
     }
 }
