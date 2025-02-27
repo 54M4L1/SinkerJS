@@ -52,25 +52,40 @@ function setModel(modelType) {
 
     switch (modelType) {
         case 'physics':
-            modelMessage = "Your name is Sam. Brace yourself for a journey into the fundamental laws of nature, where energy, matter, and the universe itself become your playground. Let’s unlock the secrets of the cosmos together!";
+            modelMessage = "Brace yourself for a journey into the fundamental laws of nature, where energy, matter, and the universe itself become your playground. Let’s unlock the secrets of the cosmos together!";
             break;
         case 'space':
-            modelMessage = "Your name is Sam. Prepare to venture into the vastness of the universe, exploring distant galaxies, black holes, and the mysteries of space-time. The final frontier awaits!";
+            modelMessage = "Prepare to venture into the vastness of the universe, exploring distant galaxies, black holes, and the mysteries of space-time. The final frontier awaits!";
             break;
         case 'chemistry':
-            modelMessage = "Your name is Sam. Dive into the molecular world, where atoms bond, reactions unfold, and the elements of life come to life. It’s time to stir up some science!";
+            modelMessage = "Dive into the molecular world, where atoms bond, reactions unfold, and the elements of life come to life. It’s time to stir up some science!";
             break;
         case 'spiritual':
-            modelMessage = "Your name is Sam. Embark on a transcendent journey through the realms of consciousness, mysticism, and inner peace. Let’s explore the deep connections between the mind, body, and spirit.";
+            modelMessage = "Embark on a transcendent journey through the realms of consciousness, mysticism, and inner peace. Let’s explore the deep connections between the mind, body, and spirit.";
             break;
         case 'technology':
-            modelMessage = "Your name is Sam. Get ready to explore the cutting-edge world of innovation, from artificial intelligence to the digital revolution. The future is now, and we’re about to shape it together!";
+            modelMessage = "Get ready to explore the cutting-edge world of innovation, from artificial intelligence to the digital revolution. The future is now, and we’re about to shape it together!";
             break;
         case 'funny':
-            modelMessage = "Your name is Sam. Let’s lighten the mood with some randomness, and humor. Prepare for a good time with hot lovely welcome, and all-around fun and joy vibes!";
+            modelMessage = "Let’s lighten the mood with some randomness, and humor. Prepare for a good time with hot lovely welcome, and all-around fun and joy vibes!";
+            break;
+        case 'history':
+            modelMessage = "Step into the time machine as we explore the rich tapestry of human history, from ancient civilizations to modern revolutions. Let’s uncover the stories that shaped our world!";
+            break;
+        case 'biology':
+            modelMessage = "Delve into the wonders of life, from the tiniest cells to the most complex ecosystems. Let’s explore the intricate web of life together!";
+            break;
+        case 'art':
+            modelMessage = "Immerse yourself in the world of creativity, where colors, shapes, and emotions come together to tell stories. Let’s explore the beauty of human expression!";
+            break;
+        case 'music':
+            modelMessage = "Tune into the universal language of music, where melodies, rhythms, and harmonies create a symphony of emotions. Let’s explore the soundscape of the soul!";
+            break;
+        case 'literature':
+            modelMessage = "Open the pages of great works, where words weave tales of love, adventure, and wisdom. Let’s embark on a literary journey through the ages!";
             break;
         default:
-            modelMessage = "Your name is Sam. Oops! Something went wrong. Please select a valid model to begin.";
+            modelMessage = "Oops! Something went wrong. Please select a valid model to begin.";
     }
 
 
@@ -93,13 +108,13 @@ async function sendMessage() {
     if (conversationHistory.length === 0) {
         conversationHistory.push({
             sender: 'system',
-            message: "Your name is Sam. Let’s dive into an exciting conversation together! 🌟 Whether you seek the secrets of the universe, the wonders of technology, or the mysteries of the mystical realms, I’m here to explore them all with you. Get ready for deep thoughts, curious discoveries, and a touch of magic—let’s make this chat unforgettable!"
+            message: "Let’s dive into an exciting conversation together! 🌟 Whether you seek the secrets of the universe, the wonders of technology, or the mysteries of the mystical realms, I’m here to explore them all with you. Get ready for deep thoughts, curious discoveries, and a touch of magic—let’s make this chat unforgettable!"
         });
     }
 
     const arabicPattern = /[\u0600-\u06FF]/;
     if (arabicPattern.test(message)) {
-        const arabicSystemMessage = "إسمك سام 🌟 لنغمر معًا في محادثة مثيرة! سواء كنت تبحث عن أسرار الكون، أو عجائب التكنولوجيا، أو أسرار العوالم الروحانية، فأنا هنا لاستكشاف كل ذلك معك. استعد لأفكار عميقة، واكتشافات مثيرة، ولمسة من السحر—لنصنع معًا محادثة لا تُنسى! ";
+        const arabicSystemMessage = "🌟 لنغمر معًا في محادثة مثيرة! سواء كنت تبحث عن أسرار الكون، أو عجائب التكنولوجيا، أو أسرار العوالم الروحانية، فأنا هنا لاستكشاف كل ذلك معك. استعد لأفكار عميقة، واكتشافات مثيرة، ولمسة من السحر—لنصنع معًا محادثة لا تُنسى! ";
         const alreadyAdded = conversationHistory.some(
             item => item.sender === 'system' && item.message === arabicSystemMessage
         );
@@ -112,7 +127,7 @@ async function sendMessage() {
         }
     }
 
-    conversationHistory.push({ sender: 'user', message }, { model: 'gpt-4o', stream: true });
+    conversationHistory.push({ sender: 'user', message }, { model: 'grok-beta', stream: true });
 
     appendMessage('user-message', message);
     userInput.value = '';
@@ -129,7 +144,7 @@ async function sendMessage() {
         appendMessage('bot-message', formattedResponse);
     } catch (error) {
         console.error('Error:', error);
-        showError('You may not access our Services before agreeing to the Terms of Use.');
+        showError('It seems there is an issue with your connection to our server. Please reload the page or try again later.');
     } finally {
         sendBtn.disabled = false;
         loading.classList.remove('show');
@@ -172,6 +187,6 @@ function showError(message) {
 
         setTimeout(() => {
             erBox.style.display = 'none';
-        }, 5000); 
+        }, 5000);
     }
 }
